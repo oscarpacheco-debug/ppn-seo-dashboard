@@ -143,6 +143,31 @@ td:not(:first-child){text-align:right}
 </style>
 </head>
 <body>
+  <script>
+(function(){
+  var PW='OffPage2026!';
+  var KEY='ppn_auth';
+  var DAYS=7;
+  function ok(){try{var d=JSON.parse(localStorage.getItem(KEY));return d&&d.expires>Date.now()}catch(e){return false}}
+  function save(){localStorage.setItem(KEY,JSON.stringify({expires:Date.now()+DAYS*864e5}))}
+  function check(){
+    var v=document.getElementById('ppn-pw').value;
+    if(v===PW){save();document.getElementById('ppn-gate').style.opacity='0';setTimeout(function(){document.getElementById('ppn-gate').remove();document.body.style.overflow=''},260)}
+    else{var e=document.getElementById('ppn-err');e.textContent='Incorrect password. Try again.';document.getElementById('ppn-pw').value='';setTimeout(function(){e.textContent=''},3000)}
+  }
+  function gate(){
+    var d=document.createElement('div');
+    d.id='ppn-gate';
+    d.style.cssText='position:fixed;inset:0;background:#5A52FF;display:flex;align-items:center;justify-content:center;z-index:99999;font-family:"Segoe UI",sans-serif;transition:opacity .25s';
+    d.innerHTML='<div style="background:#fff;border-radius:20px;padding:40px 36px;max-width:360px;width:90%;text-align:center;box-shadow:0 24px 80px rgba(0,0,0,.25)"><svg width="48" height="48" viewBox="0 0 302 302" fill="none" style="margin-bottom:20px"><rect width="302" height="302" rx="151" fill="#5A52FF"/><path d="M161.506 57.0209C128.584 57.0209 101.472 82.6075 99.2588 115.524C99.2588 116.216 99.2588 117.046 99.2588 117.737V231.84C99.2588 239.17 105.069 244.979 112.4 244.979C119.731 244.979 125.541 239.17 125.541 231.84V119.95C125.541 99.4809 142.417 83.299 162.198 83.299C181.978 83.299 198.854 100.172 198.854 119.95C198.854 139.728 181.978 156.463 162.198 156.463C154.866 156.463 149.056 162.272 149.056 169.602C149.056 176.932 154.866 182.741 162.198 182.741C195.811 182.741 225.136 154.25 225.136 119.812C225.136 85.3736 195.119 57.0209 161.506 57.0209Z" fill="white"/></svg><p style="font-size:18px;font-weight:800;color:#111827;margin:0 0 6px">papernest Off-Page</p><p style="font-size:13px;color:#63697F;margin:0 0 24px">Enter your team password to continue</p><input id="ppn-pw" type="password" placeholder="Password" autocomplete="current-password" style="width:100%;border:2px solid #EEEFF2;border-radius:10px;padding:11px 14px;font-size:14px;font-family:inherit;outline:none;box-sizing:border-box;margin-bottom:10px" onkeydown="if(event.key===\'Enter\')window.ppnCheck()"><div id="ppn-err" style="color:#DC2626;font-size:12px;min-height:18px;margin-bottom:8px"></div><button onclick="window.ppnCheck()" style="width:100%;background:#5A52FF;color:#fff;border:none;border-radius:10px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">Access →</button><p style="font-size:11px;color:#B0B3C0;margin:16px 0 0">Session lasts 7 days · papernest internal tools</p></div>';
+    document.body.style.overflow='hidden';
+    document.body.appendChild(d);
+    setTimeout(function(){document.getElementById('ppn-pw').focus()},50);
+  }
+  window.ppnCheck=check;
+  if(!ok())gate();
+})();
+</script>
 
 <!-- CONNECT SCREEN -->
 <div id="connect-screen">
