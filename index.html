@@ -401,6 +401,7 @@ function buildDemo() {
 function getFiltered(rows, market, year, week) {
   return rows.filter(r=>{
     if(r['Source Flow']!=='SEO/Whale') return false;
+    if(r['Project Type']&&r['Project Type']!=='Whale') return false;
     if(market!=='All'&&r['Market']!==market) return false;
     if(String(r['Year'])!==String(year)) return false;
     if(week!=='All'&&String(r['Week'])!==String(week)) return false;
